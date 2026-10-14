@@ -79,19 +79,22 @@ Rectangle {
 
         var title = "⏱ Timer finished"
         var body = (entry.label ? entry.label + " · " : "") + T.lengthText(entry.minutes)
-        sd.call("notify", { title: title, body: body }, function(result, err) {
-            if (err) sd.run(["notify-send", "-u", "critical", title, body])
+        // Stays until dismissed; a click on it brings up the history.
+        sd.call("notify", { title: title, body: body, urgency: "critical",
+                            actions: [{ id: "default", label: "Show" }] }, function(result, err) {
+            if (result && result.action === "default")
+                sd.call("overlay.show", {}, function() { sd.call("popup.open", { surface: "history" }) })
         })
         // The sound only when it ended just now (not after hours with
         // SUPER DESKTOP closed).
         if (Date.now() - entry.finishedAt < 5 * 60000) root.ding()
     }
 
+    // The desktop's alarm sound (else "complete"); SUPER DESKTOP picks the player.
     function ding() {
-        sd.exec(["sh", "-c", "f=$1; [ -f \"$f\" ] || f=/usr/share/sounds/freedesktop/stereo/complete.oga; "
-                 + "pw-play \"$f\" 2>/dev/null || paplay \"$f\" 2>/dev/null || aplay -q \"$f\"",
-                 "sh", "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga"],
-                function(r) { if (r.code !== 0) sd.log("could not play the sound: " + r.stderr) })
+        sd.call("sound.play", { name: "alarm-clock-elapsed" }, function(result, err) {
+            if (err) sd.call("sound.play", { name: "complete" })
+        })
     }
 
     function acknowledge() { sd.setValue("alert", null) }

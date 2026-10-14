@@ -43,9 +43,10 @@ Or approve it in Settings → Plugins, where **Ask AI to review** reads it first
 
 - Saves the running timer and the history in SUPER DESKTOP's plugin values
   (`~/.local/state/super-desktop/plugins/focus-timer.data.json`).
-- Shows notifications through SUPER DESKTOP (`notify-send`).
-- Plays `alarm-clock-elapsed.oga` from the freedesktop sound theme
-  (`sound-theme-freedesktop`) with `pw-play`, else `paplay`, else `aplay`.
+- Shows notifications through SUPER DESKTOP (`notify-send`); clicking one
+  shows SUPER DESKTOP with the history.
+- Plays `alarm-clock-elapsed` from the freedesktop sound theme
+  (`sound-theme-freedesktop`) through SUPER DESKTOP's `sound.play`.
 - Nothing else: no network, no other files, no other programs.
 
 ## Change it

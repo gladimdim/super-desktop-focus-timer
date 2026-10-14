@@ -3,6 +3,8 @@
   "id": "focus-timer",
   "name": "Focus timer",
   "description": "A timer in the top bar: click to start one (5, 15, 25 min or your own length, with an optional label); it shows the time left. Right-click for the finished timers. When one ends it notifies, plays a sound and flashes until clicked.",
+  "version": "1.0.0",
+  "categories": ["productivity", "time"],
   "surfaces": [
     { "id": "main", "slot": "toolbar.item", "qml": "Toolbar.qml", "size": 112, "tooltip": "Click to start a timer · right-click for the history" },
     { "id": "start", "slot": "popup", "qml": "StartPopup.qml", "size": 400, "height": 310 },
