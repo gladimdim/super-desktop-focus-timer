@@ -1,0 +1,4 @@
+# SUPER DESKTOP copies its plugin skill into every plugin folder.
+.claude/skills/
+.sd-skill-version
+__pycache__/
